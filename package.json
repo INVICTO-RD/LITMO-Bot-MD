@@ -1,0 +1,15 @@
+{
+  "name": "litmo-bot-md",
+  "version": "1.0.0",
+  "description": "Un bot de WhatsApp para gestionar listas de personas.",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "whatsapp-web.js": "^1.16.6",
+    "qrcode-terminal": "^0.12.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
