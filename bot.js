@@ -50,6 +50,8 @@ client.on('message', msg => {
         } else {
             client.sendMessage(chatId, 'Por favor, proporciona un nombre.');
         }
+    } else if (message === 'menu') {
+        sendMenu(chatId);
     }
 });
 
@@ -79,6 +81,19 @@ function confirmJoinList(list, number, name, chatId) {
     client.sendMessage(chatId, `Estás uniéndote en la lista, agrega un nombre. Seguro que quieres ese nombre, ${name}?`);
     list.push({ number, name, time: new Date() });
     client.sendMessage(chatId, `Estás en la lista [✅]`);
+}
+
+function sendMenu(chatId) {
+    const menuMessage = `
+Comandos disponibles:
+1. listahoy - Muestra la lista de personas para hoy.
+2. listaMñ - Agrega tu número a la lista de mañana.
+3. menúlista - Muestra las listas de hoy y mañana.
+4. borrar lista - Borra todas las listas (solo para el creador del bot).
+5. .unirmelista [nombre] - Agrega tu número a la lista de hoy con el nombre proporcionado.
+6. menu - Muestra este menú de comandos.
+    `;
+    client.sendMessage(chatId, menuMessage);
 }
 
 client.initialize();
