@@ -59,7 +59,7 @@ client.on('message', msg => {
             client.sendMessage(chatId, 'Por favor, proporciona un nombre.');
         }
     } else if (message === 'menu') {
-        sendMenu(client, chatId);
+        sendMenu(client, chatId, OWNER_NUMBER);
     }
 });
 
