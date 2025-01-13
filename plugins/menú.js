@@ -2,7 +2,7 @@
 
 function sendMenu(client, chatId) {
     const ownerName = 'JUAN'; // Reemplaza con el nombre del dueño
-    const imageUrl = 'URL_DE_LA_IMAGEN'; // Reemplaza con la URL de la imagen
+    const imageUrl = 'https://i.postimg.cc/sDKhjV8B/IMG-20250111-WA0042.jpg'; // Reemplaza con la URL de la imagen
 
     const menuMessage = `
 *Menú de Comandos Disponibles:*
