@@ -60,6 +60,8 @@ client.on('message', msg => {
         }
     } else if (message === 'menu') {
         sendMenu(client, chatId, OWNER_NUMBER);
+    } else if (message === 'si' || message === 'Sí' || message === 'sí') {
+        handleTomorrowList(from, chatId, message);
     }
 });
 
@@ -72,8 +74,26 @@ function addToList(list, number, chatId, day) {
         const now = new Date();
         list.push({ number, time: now });
         client.sendMessage(chatId, `Te has agregado a la lista de ${day}.`);
+    } else if (day === 'hoy') {
+        client.sendMessage(chatId, `Se logró el límite de personas para hoy. ¿Quieres apuntarte para mañana? Responde con 'si' para verificar.`);
+    }
+}
+
+function handleTomorrowList(from, chatId, message) {
+    if (!tomorrowList.some(item => item.number === from)) {
+        client.sendMessage(chatId, 'Por favor, proporciona tu nombre para agregar a la lista de mañana.');
+        client.on('message', msg => {
+            const name = msg.body;
+            if (name) {
+                const now = new Date();
+                tomorrowList.push({ number: from, name: name, time: now });
+                client.sendMessage(chatId, `Te has agregado a la lista de mañana con el nombre ${name}.`);
+            } else {
+                client.sendMessage(chatId, 'No proporcionaste un nombre válido.');
+            }
+        });
     } else {
-        client.sendMessage(chatId, `Se logró el límite de personas para hoy. ¿Quieres apuntarte para mañana? Escribe listaMñ.`);
+        client.sendMessage(chatId, 'Ya estás registrado en la lista de mañana.');
     }
 }
 
