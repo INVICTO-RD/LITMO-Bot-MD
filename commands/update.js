@@ -1,12 +1,12 @@
 const { exec } = require('child_process');
-const fs = require('fs');
 
 module.exports = {
     name: 'update',
     description: 'Actualiza los comandos agregados recientemente',
     execute(message, args) {
-        // Verificar si el mensaje fue enviado por el dueño del bot
-        if (message.author.id !== process.env.OWNER_ID) {
+        // Verificar si el mensaje fue enviado por el dueño del bot usando el número de WhatsApp
+        const ownerNumber = '18098781279'; // Reemplaza con el número de WhatsApp del dueño del bot
+        if (message.from !== ownerNumber) {
             return message.reply('No tienes permiso para usar este comando.');
         }
 
