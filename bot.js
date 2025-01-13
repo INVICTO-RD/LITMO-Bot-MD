@@ -1,6 +1,7 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const fs = require('fs');
+const { sendMenu } = require('./plugins/menu');
 
 const client = new Client({
     authStrategy: new LocalAuth()
@@ -23,6 +24,13 @@ client.on('message', msg => {
     const chatId = msg.from;
     const from = msg.author || msg.from;
     const message = msg.body;
+
+    // Mostrar mensajes en Termux
+    console.log(`Mensaje recibido de ${from}: ${message}`);
+
+    if (msg.isGroupMsg) {
+        console.log(`Mensaje recibido en el grupo ${msg.from}`);
+    }
 
     if (message === 'listahoy') {
         sendList(chatId, todayList, 'hoy');
@@ -51,7 +59,7 @@ client.on('message', msg => {
             client.sendMessage(chatId, 'Por favor, proporciona un nombre.');
         }
     } else if (message === 'menu') {
-        sendMenu(chatId);
+        sendMenu(client, chatId);
     }
 });
 
@@ -81,19 +89,6 @@ function confirmJoinList(list, number, name, chatId) {
     client.sendMessage(chatId, `Estás uniéndote en la lista, agrega un nombre. Seguro que quieres ese nombre, ${name}?`);
     list.push({ number, name, time: new Date() });
     client.sendMessage(chatId, `Estás en la lista [✅]`);
-}
-
-function sendMenu(chatId) {
-    const menuMessage = `
-Comandos disponibles:
-1. listahoy - Muestra la lista de personas para hoy.
-2. listaMñ - Agrega tu número a la lista de mañana.
-3. menúlista - Muestra las listas de hoy y mañana.
-4. borrar lista - Borra todas las listas (solo para el creador del bot).
-5. .unirmelista [nombre] - Agrega tu número a la lista de hoy con el nombre proporcionado.
-6. menu - Muestra este menú de comandos.
-    `;
-    client.sendMessage(chatId, menuMessage);
 }
 
 client.initialize();
