@@ -3,14 +3,52 @@ const qrcode = require('qrcode-terminal');
 const fs = require('fs');
 const { sendMenu } = require('./plugins/menu');
 
+const getDominicanTime = () => {
+    const now = new Date();
+    const dominicanOffset = -4; // UTC-4 for the Dominican Republic
+    const dominicanDate = new Date(now.getTime() + (dominicanOffset * 60 * 60 * 1000));
+    return dominicanDate;
+};
+
+const client = new Client({
+    authStrategy: new LocalAuth()
+});
+const { Client, LocalAuth } = require('whatsapp-web.js');
+const qrcode = require('qrcode-terminal');
+const fs = require('fs');
+const { sendMenu } = require('./plugins/menu');
+
 const client = new Client({
     authStrategy: new LocalAuth()
 });
 
 let todayList = [];
 let tomorrowList = [];
+let savedList = [];
 const MAX_LIST_SIZE = 35;
 const OWNER_NUMBER = '18098781279'; // Reemplaza con tu número
+
+const getDominicanTime = () => {
+    const now = new Date();
+    const dominicanOffset = -4; // UTC-4 for the Dominican Republic
+    const dominicanDate = new Date(now.getTime() + (dominicanOffset * 60 * 60 * 1000));
+    return dominicanDate;
+};
+
+const checkAndMoveLists = () => {
+    const currentTime = getDominicanTime();
+    const currentHour = currentTime.getHours();
+    const currentMinute = currentTime.getMinutes();
+
+    if (currentHour === 0 && currentMinute === 0) { // Assuming midnight as the reset time
+        savedList = [...todayList];
+        todayList = [...tomorrowList];
+        tomorrowList = [];
+        client.sendMessage(OWNER_NUMBER, 'La lista de hoy ha sido guardada y la lista de mañana se ha movido a hoy.');
+    }
+};
+
+setInterval(checkAndMoveLists, 60000); // Check every minute
 
 client.on('qr', (qr) => {
     qrcode.generate(qr, { small: true });
@@ -105,4 +143,4 @@ function sendList(chatId, list, day) {
     for (let i = list.length; i < MAX_LIST_SIZE; i++) {
         message += `${i + 1}. *Vacío* [❌]\n`;
     }
-}
+                      }
