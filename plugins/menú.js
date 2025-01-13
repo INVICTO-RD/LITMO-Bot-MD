@@ -1,7 +1,7 @@
 // plugins/menu.js
 
-function sendMenu(client, chatId) {
-    const ownerName = 'JUAN'; // Reemplaza con el nombre del dueño
+function sendMenu(client, chatId, ownerNumber) {
+    const ownerName = '18098781279'; // Reemplaza con el nombre del dueño
     const imageUrl = 'https://i.postimg.cc/sDKhjV8B/IMG-20250111-WA0042.jpg'; // Reemplaza con la URL de la imagen
 
     const menuMessage = `
