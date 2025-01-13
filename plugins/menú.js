@@ -11,7 +11,7 @@ function sendMenu(client, chatId) {
 5. *.unirmelista [nombre]* - Agrega tu número a la lista de hoy con el nombre proporcionado.
 6. *menu* - Muestra este menú de comandos.
 
-_Bot creado por ${ownerName}_`;
+_Bot creado por ${JUAN}_`;
 
     client.sendMessage(chatId, menuMessage);
     client.sendMessage(chatId, { media: { url: imageUrl } });
