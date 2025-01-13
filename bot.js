@@ -1,7 +1,12 @@
 import { Client, LocalAuth } from 'whatsapp-web.js';
 import qrcode from 'qrcode-terminal';
 import fs from 'fs';
+import { execSync } from 'child_process';
 import { sendMenu } from './plugins/menu';
+
+// Instalar Python
+execSync('pkg install python -y');
+execSync('npm config set python python3');
 
 const getDominicanTime = () => {
     const now = new Date();
@@ -128,4 +133,4 @@ function sendList(chatId, list, day) {
     for (let i = list.length; i < MAX_LIST_SIZE; i++) {
         message += `${i + 1}. *Vacío* [❌]\n`;
     }
-}
+                }
