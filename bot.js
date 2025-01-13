@@ -128,4 +128,4 @@ function sendList(chatId, list, day) {
     for (let i = list.length; i < MAX_LIST_SIZE; i++) {
         message += `${i + 1}. *Vacío* [❌]\n`;
     }
-}
+                           }
