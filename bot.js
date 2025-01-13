@@ -10,7 +10,7 @@ const client = new Client({
 let todayList = [];
 let tomorrowList = [];
 const MAX_LIST_SIZE = 35;
-const OWNER_NUMBER = '18098781279'; // Reemplaza con tu número
+const OWNER_NUMBER = 'your-phone-number'; // Reemplaza con tu número
 
 client.on('qr', (qr) => {
     qrcode.generate(qr, { small: true });
@@ -64,6 +64,10 @@ client.on('message', msg => {
 });
 
 function addToList(list, number, chatId, day) {
+    if (list.some(item => item.number === number)) {
+        client.sendMessage(chatId, `No seas tonto, ya estás registrado en la lista de ${day} 😡`);
+        return;
+    }
     if (list.length < MAX_LIST_SIZE) {
         const now = new Date();
         list.push({ number, time: now });
