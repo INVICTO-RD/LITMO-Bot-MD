@@ -10,7 +10,7 @@ const client = new Client({
 let todayList = [];
 let tomorrowList = [];
 const MAX_LIST_SIZE = 35;
-const OWNER_NUMBER = 'your-phone-number'; // Reemplaza con tu número
+const OWNER_NUMBER = '18098781279'; // Reemplaza con tu número
 
 client.on('qr', (qr) => {
     qrcode.generate(qr, { small: true });
@@ -74,19 +74,19 @@ function addToList(list, number, chatId, day) {
 }
 
 function sendList(chatId, list, day) {
-    let message = `Lista de ${day}:\n`;
+    let message = `*Lista de ${day}:*\n`;
     list.forEach((item, index) => {
-        message += `${index + 1} - ${item.number} [✅] ${item.time}\n`;
+        message += `${index + 1}. *Número:* ${item.number}\n   *Hora:* ${item.time}\n`;
     });
     for (let i = list.length; i < MAX_LIST_SIZE; i++) {
-        message += `${i + 1} - vacío [❌]\n`;
+        message += `${i + 1}. *Vacío* [❌]\n`;
     }
-    message += `Hay ${list.length} personas en la lista.`;
+    message += `\nHay ${list.length} personas en la lista.`;
     client.sendMessage(chatId, message);
 }
 
 function confirmJoinList(list, number, name, chatId) {
-    client.sendMessage(chatId, `Estás uniéndote en la lista, agrega un nombre. Seguro que quieres ese nombre, ${name}?`);
+    client.sendMessage(chatId, `Estás uniéndote en la lista, agrega un nombre. ¿Seguro que quieres ese nombre, ${name}?`);
     list.push({ number, name, time: new Date() });
     client.sendMessage(chatId, `Estás en la lista [✅]`);
 }
