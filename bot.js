@@ -1,7 +1,7 @@
-const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
-const fs = require('fs');
-const { sendMenu } = require('./plugins/menu');
+import { Client, LocalAuth } from 'whatsapp-web.js';
+import qrcode from 'qrcode-terminal';
+import fs from 'fs';
+import { sendMenu } from './plugins/menu';
 
 const getDominicanTime = () => {
     const now = new Date();
@@ -128,4 +128,4 @@ function sendList(chatId, list, day) {
     for (let i = list.length; i < MAX_LIST_SIZE; i++) {
         message += `${i + 1}. *Vacío* [❌]\n`;
     }
-                           }
+}
