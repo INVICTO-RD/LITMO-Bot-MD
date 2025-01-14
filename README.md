@@ -2,7 +2,7 @@
 <p align="center">🌟 Déjanos tu estrella</p>
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0000&lines=Bienvenido+al+Repositorio;LITMO+-+Bot+-+MD;Gracias+por+preferirnos;Creado+por+INVICTO-RD;💨🔥+BOOM!!!;💨🔥)](https://git.io/typing-svg)
-![LITMO](https://i.ibb.co/4NWqF0m/file.jpg)
+![LITMO](anime-girl-pop-art-style-retro-anime-wallpaper_1262773-425.jpg)
 
 > ⚜️ Versión 1.0.0
 
