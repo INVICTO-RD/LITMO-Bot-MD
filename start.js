@@ -1,12 +1,12 @@
-const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
-const fs = require('fs');
-const path = require('path');
-const { spawn } = require('child_process');
-const { Low, JSONFile } = require('lowdb');
-const readline = require('readline');
-const { readdirSync, unlinkSync, statSync } = require('fs');
-const { platform } = require('process');
+import { Client, LocalAuth } from 'whatsapp-web.js';
+import qrcode from 'qrcode-terminal';
+import fs from 'fs';
+import path from 'path';
+import { spawn } from 'child_process';
+import { Low, JSONFile } from 'lowdb';
+import { createInterface } from 'readline';
+import { readdirSync, unlinkSync } from 'fs';
+import { platform } from 'process';
 
 const client = new Client({
     authStrategy: new LocalAuth()
@@ -28,10 +28,10 @@ client.on('message', msg => {
 
 client.initialize();
 
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+const rl = createInterface({ input: process.stdin, output: process.stdout });
 const question = (text) => new Promise((resolve) => rl.question(text, resolve));
 
-global.__dirname = path.dirname(__filename);
+global.__dirname = path.dirname(new URL(import.meta.url).pathname);
 global.db = new Low(new JSONFile('database.json'));
 global.loadDatabase = async function () {
     if (global.db.data !== null) return;
