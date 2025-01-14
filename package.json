@@ -15,7 +15,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "eslint": "eslint .",
-    "eslintfix": "eslint --fix ."
+    "eslintfix": "eslint --fix .",
+    "start2": "node index.js",
+    "test2": "nodemon index.js"
   },
   "author": "INVICTO-RD",
   "license": "GPL-3.0-or-later",
